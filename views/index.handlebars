@@ -1,0 +1,114 @@
+<div class="jumbotron">
+	<div class="center">
+		<h1>BAR BUDDIES</h1><br>
+		<p>Have plans tonight? <br> See which bars are hoppin' tonight and RSVP ahead of time!</p>	
+	</div>
+</div>
+<script src="/js/handlebars-v4.0.10.js"></script>
+<div>
+	{{#if success_msg}}
+		<div class="center alert alert-success">{{success_msg}}</div>
+	{{/if}}
+	{{#if error_msg}}
+		<div class="center alert alert-danger">{{error_msg}}</div>
+	{{/if}}
+	<form method="post" action="/">
+		<div class="form-group col-xs-12 col-sm-10">
+			<input type="text" name="search" class="form-control center" placeholder="Where are you?">	
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<button class="btn btn-primary btn-block" type="submit">Search</button>
+		</div>
+		
+	</form>
+	<br><br>
+	<div>
+
+		{{#if rests}}
+
+		
+			{{#each rests.businesses}}
+				<div class="media rests well">
+					<div class="media-left">
+						<a href="{{url}}">
+							<img height="100" width="100" class="media-object" src="{{image_url}}" alt="{{name}}">
+						</a>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">{{name}}</h4><br>
+						<p><span class="going">0</span> Going</p>
+					</div>
+					<div class="media-right">
+						<form method="post" action="/going">
+							<input type="hidden" name="id" value="{{id}}">
+							<input type="hidden" name="name" value="{{name}}">
+							<input type="hidden" name="url" value="{{url}}">
+							<input type="hidden" name="image" value="{{image_url}}">
+							<div class="isUserGoing"></div>
+						</form>
+						
+					</div>
+				</div>
+			{{/each}}
+		{{/if}}
+	</div>
+</div>
+<div id="some"></div>
+<script type="text/javascript">
+
+	// used to send ajax request to get going count of restaurants and
+	// check whether a user is going to a restaurant or not.
+	function sendRequestForGoingCount(url, tags, index) {
+		let xmlHttp = new XMLHttpRequest();
+
+		xmlHttp.open("GET", url, true);
+		xmlHttp.onreadystatechange = () => {
+			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+				tags[index].innerHTML = xmlHttp.responseText;
+			}
+		}
+		xmlHttp.send();
+	}
+
+	function sendRequestForUserStatus(url, tags, index) {
+		let xmlHttp = new XMLHttpRequest();
+
+		xmlHttp.open("GET", url, true);
+		xmlHttp.onreadystatechange = () => {
+			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+				let response = xmlHttp.responseText;
+
+				if (response === "going") {
+					tags[index].innerHTML = "<div class='alert alert-success userStatus'>You are going here</div>";
+				}
+				else {
+					tags[index].innerHTML = "<div class='alert alert-info userStatus'>You are not going here</div>" +
+											"<button type='submit' class='btn btn-block btn-primary'>Add to Plan?</button>";
+				}
+			}
+		}
+		xmlHttp.send();
+	}
+
+	let isPost = "{{rests}}";
+	// Post request detected
+	if (isPost !== "") {
+		isPost = {{{stringify rests}}};
+		
+		let rests = isPost;
+		let going = $(".going");
+
+		// get going count
+		for (let i in rests.businesses) {
+			let url = "http://localhost:3000/calculateGoingCount/ids/" + rests.businesses[i].id;
+			sendRequestForGoingCount(url, going, i);
+		}
+
+		// find whether user is going or not
+		let userGoing = $(".isUserGoing");
+		for (let i in rests.businesses) {
+			let url = "http://localhost:3000/isUserGoing/id/" + rests.businesses[i].id;
+			sendRequestForUserStatus(url, userGoing, i);
+		}
+	}
+</script>

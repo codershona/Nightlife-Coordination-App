@@ -1,0 +1,56 @@
+<div>
+	<h1 class="center">Places you are going</h1><br><br>
+	
+	<div id="myplans"></div>
+</div>
+
+<script type="text/javascript">
+	function sendXMLRequest(url) {
+		var xmlHttp = new XMLHttpRequest();
+
+		xmlHttp.open("GET", url, true);
+		xmlHttp.onreadystatechange = () => {
+			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+
+				$(template(JSON.parse(xmlHttp.responseText))).appendTo("#myplans");
+			}
+		}
+
+		xmlHttp.send();
+	}
+
+	let restCount = {{restCount}};
+	
+	if (restCount == 0) {
+		$("<p class='center'>You are no plans for tonight.<p>").appendTo("#myplans");
+	}
+
+	for (let i = 0; i < restCount; i++) {
+		let url = "http://localhost:3000/restData/index/" + i;
+		sendXMLRequest(url);
+	}
+
+	function template(restaurant) {
+		let mediaBody = "<div class='media-body'><h4 class='media-heading'>" 
+						+ restaurant.name +"</h4><br>";
+		mediaBody += "<p>" + restaurant.goingCount +" Going</p></div>";
+
+		let mediaRight = '<div class="media-right"><form method="post" action="/cancelGoing">' +
+							'<input type="hidden" name="id" value="' + restaurant.id +'">' +
+							'<input type="hidden" name="name" value="' + restaurant.name + '">' +
+							'<input type="hidden" name="url" value="' + restaurant.url + '">' +
+							'<input type="hidden" name="image" value="'+ restaurant.image_url +'">' +
+							'<button type="submit" class="btn btn-primary">Remove from Plans?</button>' +
+							'</form></div>';
+
+		let mediaLeft = '<div class="media-left">' +
+						'<a href="'+ restaurant.url +'">' +
+							'<img height="80" width="80" class="media-object" src="'+ restaurant.image_url +'" ' + 
+							'alt="'+ restaurant.name +'">' +
+						'</a>' +
+					'</div>';
+		let media = "<div class='media well'>" + mediaLeft + mediaBody + mediaRight + "</div>";
+		
+		return media;
+	}
+</script>
