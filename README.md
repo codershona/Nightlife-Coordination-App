@@ -8,6 +8,7 @@ Navigate to this repository using terminal and run `npm install` to install all 
 Run `node app` to start the server.  
 navigate to `http://localhost:3000/` in your browser.  
   
+Check out the video below    
 [![Nightlife Coordination App](https://github.com/abkunal/Nightlife-Coordination-App/blob/master/Nightlife%20coordination%20screenshot.png)](https://www.youtube.com/watch?v=k-bZFgaa9Kc)  
   
 ### User Stories  
