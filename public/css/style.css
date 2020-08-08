@@ -2,6 +2,32 @@ body {
 	background-color: #fab1a0;
 }
 
+.navbar-default .navbar-collapse, .navbar-default {
+    border-color: #e7e7e7;
+    background-color: #2d3436;
+}
+
+.navbar-default .navbar-brand {
+    color: #fdf8f8;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fbf6f6;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: sans-serif;
+
+}
+
+.container .jumbotron {
+	padding-right: 60px;
+   padding-left: 60px;
+  background-color: #a29bfe;
+  
+}
+
 
 
 .center {
