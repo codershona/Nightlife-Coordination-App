@@ -15,7 +15,7 @@ Check out the video below
 
 ### After adding some styling :
 
-[![Nightlife Coordination App](https://github.com/abkunal/Nightlife-Coordination-App/blob/master/stylenightlifeapp.png)](https://www.youtube.com/watch?v=k-bZFgaa9Kc) 
+<img src="stylenightlifeapp.png" width="260" />
 
 
   
