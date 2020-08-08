@@ -9,7 +9,15 @@ Run `node app` to start the server.
 navigate to `http://localhost:3000/` in your browser.  
   
 Check out the video below    
-[![Nightlife Coordination App](https://github.com/abkunal/Nightlife-Coordination-App/blob/master/Nightlife%20coordination%20screenshot.png)](https://www.youtube.com/watch?v=k-bZFgaa9Kc)  
+[![Nightlife Coordination App](https://github.com/abkunal/Nightlife-Coordination-App/blob/master/Nightlife%20coordination%20screenshot.png)](https://www.youtube.com/watch?v=k-bZFgaa9Kc) 
+
+
+
+### After adding some styling :
+
+[![Nightlife Coordination App](https://github.com/abkunal/Nightlife-Coordination-App/blob/master/stylenightlifeapp.png)](https://www.youtube.com/watch?v=k-bZFgaa9Kc) 
+
+
   
 ### User Stories  
   
