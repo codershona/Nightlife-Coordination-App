@@ -15,7 +15,7 @@ Check out the video below
 
 ### After adding some styling :
 
-<img src="stylenightlifeapp.png" width="260" />
+<img src="stylenightlifeapp.png" width="1080" />
 
 
   
